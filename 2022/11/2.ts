@@ -9,7 +9,6 @@ const monkeys = [];
 let currentRound = 1;
 
 for (let i = 0; i < inputRows.length; i += 7) {
-    const index = inputRows[i].match(/\d/)[0];
     const startItemsStr = inputRows[i + 1].slice(18).split(', ').map(Number);
     const [left, operation, right] = inputRows[i + 2].slice(19).split(' ');
     const divideBy = Number(inputRows[i + 3].slice(21));
@@ -35,13 +34,13 @@ while (currentRound <= 10000) {
             const currentWorry = monkey.items.splice(i--, 1);
             let newWorry = eval(monkey.operation.replaceAll('old', currentWorry));
 
+            newWorry = lowestDividable + (newWorry % lowestDividable);
+
             const isDividable = newWorry % monkey.divideBy === 0;
 
-            if (newWorry > lowestDividable) {
-                newWorry = lowestDividable + (newWorry % lowestDividable);
-            }
+            const monkeyIndex = monkey[`${isDividable}`];
 
-            monkeys[monkey[`${isDividable}`]].items.push(newWorry);
+            monkeys[monkeyIndex].items.push(newWorry);
         }
     });
 
