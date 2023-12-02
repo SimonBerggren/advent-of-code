@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
+    "target": "ES2022",
     "strict": false,
     "skipLibCheck": true,
-    "types": [
-      "node"
-    ]
+    "esModuleInterop": true,
+    "types": ["node"]
   }
 }
